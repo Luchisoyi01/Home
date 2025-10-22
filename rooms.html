@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Management - Hostel Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="active">
+            <div class="sidebar-header">
+                <h3>Hostel Admin</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="hostel-admin.html">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="rooms.html">
+                        <i class="bi bi-house-door"></i> Rooms
+                    </a>
+                </li>
+                <li>
+                    <a href="students.html">
+                        <i class="bi bi-people"></i> Students
+                    </a>
+                </li>
+                <li>
+                    <a href="payments.html">
+                        <i class="bi bi-cash"></i> Payments
+                    </a>
+                </li>
+                <li>
+                    <a href="maintenance.html">
+                        <i class="bi bi-tools"></i> Maintenance
+                    </a>
+                </li>
+                    <li>
+                        <a href="admin-announcements.html">
+                            <i class="bi bi-megaphone"></i> Announcements
+                        </a>
+                    </li>
+                <li>
+                    <a href="settings.html">
+                        <i class="bi bi-gear"></i> Settings
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <!-- Top Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div class="ms-auto">
+                        <div class="dropdown">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                <i class="bi bi-person-circle"></i> Admin User
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container-fluid">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Room Management</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal">
+                        <i class="bi bi-plus-circle"></i> Add Room
+                    </button>
+                </div>
+
+                <!-- Room Statistics -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card bg-primary text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Rooms</h5>
+                                <h2>150</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Occupied</h5>
+                                <h2>125</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-warning text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Available</h5>
+                                <h2>25</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-danger text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Under Maintenance</h5>
+                                <h2>5</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room List -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Room No.</th>
+                                        <th>Type</th>
+                                        <th>Floor</th>
+                                        <th>Capacity</th>
+                                        <th>Occupied</th>
+                                        <th>Status</th>
+                                        <th>Price/Month</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>A-101</td>
+                                        <td>Double</td>
+                                        <td>1st</td>
+                                        <td>2</td>
+                                        <td>2</td>
+                                        <td><span class="badge bg-success">Occupied</span></td>
+                                        <td>$500</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" title="View Details"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-warning" title="Edit"><i class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-danger" title="Mark Maintenance"><i class="bi bi-tools"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-202</td>
+                                        <td>Single</td>
+                                        <td>2nd</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td><span class="badge bg-warning">Available</span></td>
+                                        <td>$300</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" title="View Details"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-warning" title="Edit"><i class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-danger" title="Mark Maintenance"><i class="bi bi-tools"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Room Modal -->
+    <div class="modal fade" id="addRoomModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Room</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label">Room Number</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Room Type</label>
+                            <select class="form-select" required>
+                                <option value="">Select Type</option>
+                                <option>Single</option>
+                                <option>Double</option>
+                                <option>Triple</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Floor</label>
+                            <select class="form-select" required>
+                                <option value="">Select Floor</option>
+                                <option>1st Floor</option>
+                                <option>2nd Floor</option>
+                                <option>3rd Floor</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Capacity</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Price per Month</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add Room</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

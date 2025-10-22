@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements - Hostel Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <div class="student-profile text-center">
+                    <img src="https://via.placeholder.com/80" class="rounded-circle mb-2" alt="Student Photo">
+                    <h4>John Doe</h4>
+                    <small class="text-light">Student ID: STD001</small>
+                </div>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="student-dashboard.html">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="student-dashboard.html">
+                        <i class="bi bi-house-door"></i> My Room
+                    </a>
+                </li>
+                <li>
+                    <a href="student-dashboard.html">
+                        <i class="bi bi-cash"></i> Payments
+                    </a>
+                </li>
+                <li>
+                    <a href="student-dashboard.html">
+                        <i class="bi bi-tools"></i> Maintenance
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="announcements.html">
+                        <i class="bi bi-megaphone"></i> Announcements
+                    </a>
+                </li>
+                <li>
+                    <a href="student-dashboard.html">
+                        <i class="bi bi-person"></i> Profile
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <!-- Top Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info d-lg-none">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="notifications me-3">
+                            <button class="btn btn-link position-relative">
+                                <i class="bi bi-bell-fill fs-5"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    2
+                                </span>
+                            </button>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                <i class="bi bi-person-circle"></i> John Doe
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="student-profile.html"><i class="bi bi-person"></i> Profile</a></li>
+                                <li><a class="dropdown-item" href="login.html"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container-fluid">
+                <h2 class="mb-4">Announcements</h2>
+
+                <!-- Announcement Categories -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-primary active">All</button>
+                            <button type="button" class="btn btn-outline-primary">General</button>
+                            <button type="button" class="btn btn-outline-primary">Maintenance</button>
+                            <button type="button" class="btn btn-outline-primary">Events</button>
+                            <button type="button" class="btn btn-outline-primary">Important</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcements List -->
+                <div class="row">
+                    <!-- Important Notice -->
+                    <div class="col-md-12 mb-4">
+                        <div class="card border-danger">
+                            <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                    Important Notice
+                                </div>
+                                <span class="badge bg-light text-danger">Important</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Fire Safety Inspection - October 25, 2025</h5>
+                                <p class="card-text">Annual fire safety inspection will be conducted in all rooms. Please ensure your room is accessible between 9 AM and 5 PM.</p>
+                                <div class="text-muted small">Posted: October 20, 2025</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- General Announcement -->
+                    <div class="col-md-12 mb-4">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="bi bi-info-circle"></i>
+                                    General Announcement
+                                </div>
+                                <span class="badge bg-primary">General</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Weekend Social Event</h5>
+                                <p class="card-text">Join us for the weekend social gathering in the common room. Refreshments will be provided.</p>
+                                <div class="text-muted small">Posted: October 19, 2025</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Maintenance Notice -->
+                    <div class="col-md-12 mb-4">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="bi bi-tools"></i>
+                                    Maintenance Notice
+                                </div>
+                                <span class="badge bg-warning">Maintenance</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Water Supply Maintenance</h5>
+                                <p class="card-text">Water supply will be interrupted on October 23, 2025, from 10 AM to 2 PM due to routine maintenance.</p>
+                                <div class="text-muted small">Posted: October 18, 2025</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Announcement -->
+                    <div class="col-md-12 mb-4">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="bi bi-calendar-event"></i>
+                                    Event Announcement
+                                </div>
+                                <span class="badge bg-success">Event</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Halloween Party</h5>
+                                <p class="card-text">Get ready for our annual Halloween party on October 31, 2025! Costume competition with exciting prizes.</p>
+                                <div class="text-muted small">Posted: October 17, 2025</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <nav aria-label="Announcements pagination">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+/* Sidebar Styles */
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 15%;
+    max-width: 20%;
+    min-height: 100vh;
+    background: #1a237e;
+    color: #fff;
+    transition: all 0.3s;
+    margin-left: 0;  /* Always show by default */
+}
+
+#sidebar.active {
+    margin-left: 0;  /* Don't hide when active */
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #0d1442;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+}
+
+#sidebar ul li a {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar ul li a:hover,
+#sidebar ul li.active > a {
+    background: #283593;
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+}
+
+/* Content Styles */
+#content {
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+/* Card Overrides */
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+/* Table Styles */
+.table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Button Styles */
+.btn-info {
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    #sidebar {
+        margin-left: -250px; /* Hide on mobile by default */
+    }
+    #sidebar.active {
+        margin-left: 0;     /* Show when active on mobile */
+        position: fixed;    /* Overlay mode on mobile */
+        z-index: 1000;     /* Ensure sidebar appears above content */
+        height: 100vh;
+    }
+    #sidebarCollapse {
+        display: block;    /* Show toggle button on mobile */
+    }
+    .wrapper {
+        position: relative;
+    }
+}
+
+/* Dashboard Cards */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.card-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.card-text {
+    margin-bottom: 0.5rem;
+}
+
+/* Tables */
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Modal Styles */
+.modal-header {
+    background-color: #f8f9fa;
+}
+
+/* Form Controls */
+.form-control:focus {
+    border-color: #1a237e;
+    box-shadow: 0 0 0 0.2rem rgba(26,35,126,0.25);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

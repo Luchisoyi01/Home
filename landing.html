@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Student Haven Hostel — secure, affordable student accommodation with 24/7 support and on-site facilities.">
+    <title>Student Haven Hostel — Premium Student Accommodation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #1a4f8c;
+            --primary-dark: #0d3a6e;
+            --primary-light: #2c6cb0;
+            --secondary: #ff6b35;
+            --light-bg: #f8f9fa;
+            --dark-text: #2c3e50;
+            --light-text: #6c757d;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 8px;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .navbar {
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--primary) !important;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero h1 {
+            color: var(--white);
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero .lead {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-img {
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.5s;
+        }
+        
+        .hero-img:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background: rgba(26, 79, 140, 0.1);
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .room-price {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .testimonial {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .testimonial::before {
+            content: """;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: rgba(26, 79, 140, 0.1);
+            font-family: Georgia, serif;
+        }
+        
+        .stats-box {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            line-height: 1;
+        }
+        
+        .stats-label {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-top: 0.5rem;
+        }
+        
+        .bg-light-custom {
+            background-color: var(--light-bg);
+        }
+        
+        .faq .question {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-info li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 0.75rem;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 3rem 0 2rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero .lead {
+                font-size: 1.1rem;
+            }
+            
+            .stats-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-house-heart me-2"></i>Student Haven
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#facilities">Facilities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#rooms">Rooms</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-3"><a class="btn btn-primary" href="login.html">Student Portal</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <h1>Premium Student Living, Steps from Campus</h1>
+                    <p class="lead">Secure, modern, and community-focused accommodation designed for academic success and student wellbeing.</p>
+                    <div class="mt-4">
+                        <a href="#contact" class="btn btn-light btn-lg me-3">Book a Tour</a>
+                        <a href="#rooms" class="btn btn-outline-light btn-lg">View Rooms</a>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-4">
+                            <div class="stats-box">
+                                <span class="stats-number">150</span>
+                                <span class="stats-label">Comfortable Rooms</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stats-box">
+                                <span class="stats-number">125</span>
+                                <span class="stats-label">Happy Residents</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stats-box">
+                                <span class="stats-number">24/7</span>
+                                <span class="stats-label">Security & Support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center d-none d-lg-block">
+                    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="img-fluid hero-img" alt="Modern student accommodation">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Overview Section -->
+        <section id="overview" class="py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-8">
+                        <h2 class="section-title">Designed for Student Success</h2>
+                        <p class="fs-5">Student Haven provides more than just a place to sleep. We create an environment that supports academic achievement, personal growth, and lifelong connections.</p>
+                        <p>Our modern facilities, dedicated staff, and vibrant community ensure you have everything needed to thrive during your studies.</p>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> High-speed Wi-Fi throughout</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 24/7 security & CCTV</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Regular social events</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> On-site maintenance team</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Study rooms & common areas</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Flexible payment options</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card p-4">
+                            <h5 class="mb-3">Quick Facts</h5>
+                            <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                                <span>Total Capacity:</span>
+                                <strong>150 rooms</strong>
+                            </div>
+                            <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                                <span>Current Occupancy:</span>
+                                <strong>125 residents</strong>
+                            </div>
+                            <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                                <span>Next Inspection:</span>
+                                <strong>Oct 25, 2025</strong>
+                            </div>
+                            <div class="d-flex justify-content-between pb-2 mb-3">
+                                <span>Availability:</span>
+                                <strong class="text-success">25 rooms</strong>
+                            </div>
+                            <a href="announcements.html" class="btn btn-outline-primary w-100">View Announcements</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-5 bg-light-custom">
+            <div class="container">
+                <h2 class="section-title text-center">Why Choose Student Haven?</h2>
+                <p class="text-center mb-5 mx-auto" style="max-width: 700px;">We go beyond basic accommodation to provide a holistic living experience that supports your academic journey and personal development.</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-4 text-center">
+                        <div class="feature-icon mx-auto">
+                            <i class="bi bi-house-door"></i>
+                        </div>
+                        <h5>Comfortable Living Spaces</h5>
+                        <p>Furnished rooms with ergonomic study desks, ample storage, and comfortable bedding designed for rest and productivity.</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="feature-icon mx-auto">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                        <h5>Safe & Secure Environment</h5>
+                        <p>24/7 security personnel, CCTV surveillance, and electronic access systems ensure your safety and peace of mind.</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="feature-icon mx-auto">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h5>Vibrant Community</h5>
+                        <p>Regular events, study groups, and shared spaces foster connections and create a supportive network of peers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Facilities Section -->
+        <section id="facilities" class="py-5">
+            <div class="container">
+                <h2 class="section-title">Campus Facilities</h2>
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <div class="d-flex mb-4">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-wifi text-primary fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>High-Speed Internet</h5>
+                                <p class="mb-0">Reliable fiber-optic connection throughout the building with dedicated study bandwidth.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-cup-hot text-primary fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>Common Areas & Lounge</h5>
+                                <p class="mb-0">Spacious common areas, TV lounge, and quiet study zones for different needs.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-tools text-primary fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>On-site Maintenance</h5>
+                                <p class="mb-0">Quick-response maintenance team available for any issues with rooms or facilities.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="d-flex mb-4">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-egg-fried text-primary fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>Cafeteria & Meal Plans</h5>
+                                <p class="mb-0">Nutritious meal options with flexible plans to suit different dietary requirements.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-droplet text-primary fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>Laundry Services</h5>
+                                <p class="mb-0">Modern laundry facilities with optional cleaning services available.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-bicycle text-primary fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>Secure Bike Storage</h5>
+                                <p class="mb-0">Covered, secure bicycle storage with repair station for cycling enthusiasts.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rooms Section -->
+        <section id="rooms" class="py-5 bg-light-custom">
+            <div class="container">
+                <h2 class="section-title text-center">Accommodation Options</h2>
+                <p class="text-center mb-5 mx-auto" style="max-width: 700px;">We offer a range of room types to suit different preferences and budgets, all including utilities and high-speed internet.</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Single room" style="height: 200px; object-fit: cover;">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Single Room</h5>
+                                <p class="card-text flex-grow-1">Private room with ensuite bathroom, study desk, wardrobe, and personal refrigerator. Perfect for students who value privacy and personal space.</p>
+                                <div class="mt-auto">
+                                    <p class="room-price mb-2">$300 / month</p>
+                                    <a href="#contact" class="btn btn-primary w-100">Enquire Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Double room" style="height: 200px; object-fit: cover;">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Double Sharing</h5>
+                                <p class="card-text flex-grow-1">Spacious room with two single beds, shared bathroom, study areas, and storage. Great for friends or cost-conscious students.</p>
+                                <div class="mt-auto">
+                                    <p class="room-price mb-2">$180 / month</p>
+                                    <a href="#contact" class="btn btn-primary w-100">Enquire Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Triple room" style="height: 200px; object-fit: cover;">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Triple Room</h5>
+                                <p class="card-text flex-grow-1">Large shared room with three beds, dedicated study zones, and shared bathroom facilities. Our most budget-friendly option.</p>
+                                <div class="mt-auto">
+                                    <p class="room-price mb-2">$120 / month</p>
+                                    <a href="#contact" class="btn btn-primary w-100">Enquire Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-5">
+            <div class="container">
+                <h2 class="section-title text-center">Student Experiences</h2>
+                <p class="text-center mb-5 mx-auto" style="max-width: 700px;">Hear what our residents have to say about their experience at Student Haven.</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="testimonial h-100">
+                            <p class="mb-3">"The staff are incredibly supportive and maintenance requests are handled within hours. It's the perfect environment to focus on my studies without distractions."</p>
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <span class="text-white fw-bold">AS</span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="mb-0">Alex Student</h6>
+                                    <small class="text-muted">Engineering, 2nd Year</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="testimonial h-100">
+                            <p class="mb-3">"I love the community here! Between study groups in the common areas and social events, I've made friends from all over the world. The location can't be beat either."</p>
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <span class="text-white fw-bold">BR</span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="mb-0">Bianca Resident</h6>
+                                    <small class="text-muted">Business, 3rd Year</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="testimonial h-100">
+                            <p class="mb-3">"As an international student, safety was my top priority. Student Haven's security measures and supportive staff made my transition smooth and worry-free."</p>
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <span class="text-white fw-bold">CS</span>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="mb-0">Carlos Student</h6>
+                                    <small class="text-muted">International Relations, 1st Year</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-5 bg-light-custom">
+            <div class="container">
+                <h2 class="section-title text-center">Frequently Asked Questions</h2>
+                <p class="text-center mb-5 mx-auto" style="max-width: 700px;">Find answers to common questions about living at Student Haven.</p>
+                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="mb-4">
+                            <div class="question">How do I apply for accommodation?</div>
+                            <div class="answer text-muted">You can apply through our online portal or contact our admissions team directly. We'll guide you through availability, room selection, and the booking process.</div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="question">What is included in the rent?</div>
+                            <div class="answer text-muted">Rent includes utilities (water, electricity), high-speed Wi-Fi, access to all common facilities, security, and basic maintenance. Meal plans are available separately.</div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="question">Can I request a room change?</div>
+                            <div class="answer text-muted">Room changes are possible subject to availability. Please submit a request through the student portal or speak with our accommodation manager.</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-4">
+                            <div class="question">Are meals provided?</div>
+                            <div class="answer text-muted">We offer flexible cafeteria meal plans that can be added to your accommodation package. Various dietary requirements can be accommodated.</div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="question">What is the guest policy?</div>
+                            <div class="answer text-muted">Guests are welcome during designated hours and must be registered at reception. Overnight stays require prior approval and are limited to 3 nights per month.</div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="question">Is there parking available?</div>
+                            <div class="answer text-muted">Limited parking spaces are available for residents at an additional monthly fee. We encourage use of public transport and provide secure bicycle storage.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-5">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="row mt-4">
+                    <div class="col-lg-5">
+                        <p class="fs-5">Interested in joining our community? Contact us with any questions about availability, facilities, or the application process.</p>
+                        <ul class="contact-info list-unstyled">
+                            <li>
+                                <i class="bi bi-geo-alt"></i>
+                                <div>
+                                    <strong>Address</strong><br>
+                                    123 University Street, College Town, CT 10101
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-telephone"></i>
+                                <div>
+                                    <strong>Phone</strong><br>
+                                    +1 (234) 567-8900
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-envelope"></i>
+                                <div>
+                                    <strong>Email</strong><br>
+                                    admissions@studenthaven.com
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-clock"></i>
+                                <div>
+                                    <strong>Office Hours</strong><br>
+                                    Monday-Friday: 9am-5pm<br>
+                                    Saturday: 10am-2pm
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="card p-4 p-md-5">
+                            <h4 class="mb-4">Send an Enquiry</h4>
+                            <form id="inquiryForm" class="needs-validation" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" id="inqName" required>
+                                        <div class="invalid-feedback">Please enter your name.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="inqEmail" required>
+                                        <div class="invalid-feedback">Please provide a valid email.</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Subject</label>
+                                        <input type="text" class="form-control" id="inqSubject" required>
+                                        <div class="invalid-feedback">Please enter a subject.</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Message</label>
+                                        <textarea class="form-control" id="inqMessage" rows="4" required></textarea>
+                                        <div class="invalid-feedback">Please tell us how we can help.</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h4 class="text-white mb-3">
+                        <i class="bi bi-house-heart me-2"></i>Student Haven
+                    </h4>
+                    <p class="text-light">Providing premium student accommodation that supports academic success and personal growth since 2010.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-3">Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="#overview">Overview</a></li>
+                        <li class="mb-2"><a href="#about">About Us</a></li>
+                        <li class="mb-2"><a href="#rooms">Rooms</a></li>
+                        <li class="mb-2"><a href="#facilities">Facilities</a></li>
+                        <li class="mb-2"><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-3">Student Resources</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="login.html">Student Portal</a></li>
+                        <li class="mb-2"><a href="#">Application Process</a></li>
+                        <li class="mb-2"><a href="#">Move-in Guide</a></li>
+                        <li class="mb-2"><a href="#">House Rules</a></li>
+                        <li class="mb-2"><a href="#">Maintenance Requests</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="text-white mb-3">Contact Info</h5>
+                    <ul class="list-unstyled text-light">
+                        <li class="mb-2">123 University Street</li>
+                        <li class="mb-2">College Town, CT 10101</li>
+                        <li class="mb-2">+1 (234) 567-8900</li>
+                        <li class="mb-2">info@studenthaven.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-light opacity-50">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <small class="text-light">© 2025 Student Haven Hostel. All rights reserved.</small>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <small class="text-light">
+                        <a href="#" class="text-light text-decoration-none me-3">Privacy Policy</a>
+                        <a href="#" class="text-light text-decoration-none">Terms of Service</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="inquiryToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    Thank you! Your enquiry has been received. We'll be in touch shortly.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Bootstrap form validation + show toast on success
+        (function () {
+            'use strict'
+            const form = document.getElementById('inquiryForm');
+            const toastEl = document.getElementById('inquiryToast');
+            const bsToast = new bootstrap.Toast(toastEl);
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                if (!form.checkValidity()) {
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                // Show success toast (no backend in prototype)
+                bsToast.show();
+                form.reset();
+                form.classList.remove('was-validated');
+            }, false);
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

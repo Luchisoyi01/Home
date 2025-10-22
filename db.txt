@@ -1,0 +1,164 @@
+-- 1) Users (auth for admins & students)
+CREATE TABLE users (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  email varchar(255) UNIQUE NOT NULL,
+  password_hash varchar(255) NOT NULL,
+  role varchar(20) NOT NULL CHECK (role IN ('student','admin')),
+  is_active boolean NOT NULL DEFAULT true,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  last_login timestamptz
+);
+
+-- 2) Student profile (one-to-one with users for students)
+CREATE TABLE student_profiles (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+  student_number varchar(50) UNIQUE NOT NULL, -- e.g., STD001
+  first_name varchar(100),
+  last_name varchar(100),
+  phone varchar(50),
+  dob date,
+  course varchar(150),
+  year_of_study smallint,
+  emergency_contact jsonb, -- {name, relationship, phone}
+  checkin_date date,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+-- 3) Admin profile (optional additional metadata)
+CREATE TABLE admin_profiles (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+  display_name varchar(150),
+  is_superadmin boolean DEFAULT false,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+-- 4) Rooms
+CREATE TABLE rooms (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  room_number varchar(50) UNIQUE NOT NULL,
+  block varchar(50),
+  floor varchar(50),
+  type varchar(50), -- Single/Double/Triple...
+  capacity int NOT NULL DEFAULT 1,
+  price_per_month numeric(10,2),
+  status varchar(20) NOT NULL DEFAULT 'available', -- available/occupied/maintenance
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+-- 5) Room assignments (history + active)
+CREATE TABLE room_assignments (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id uuid NOT NULL REFERENCES student_profiles(id) ON DELETE CASCADE,
+  room_id uuid NOT NULL REFERENCES rooms(id) ON DELETE RESTRICT,
+  bed_label varchar(20), -- optional B1/B2 etc
+  start_date date NOT NULL,
+  end_date date, -- null = active
+  assigned_by uuid REFERENCES admin_profiles(user_id),
+  created_at timestamptz NOT NULL DEFAULT now(),
+  UNIQUE(room_id, bed_label, start_date) -- helps avoid accidental double-booking same bed at same time
+);
+
+-- 6) Payments
+CREATE TABLE payments (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id uuid NOT NULL REFERENCES student_profiles(id) ON DELETE CASCADE,
+  amount numeric(10,2) NOT NULL,
+  currency varchar(10) NOT NULL DEFAULT 'USD',
+  due_date date,
+  paid_at timestamptz,
+  method varchar(50), -- card/bank/transfer/paypal
+  transaction_ref varchar(200),
+  status varchar(20) NOT NULL DEFAULT 'pending', -- pending/completed/failed/refunded
+  metadata jsonb, -- store gateway response, etc
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+-- 7) Maintenance requests
+CREATE TABLE maintenance_requests (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id uuid REFERENCES student_profiles(id),
+  room_id uuid REFERENCES rooms(id),
+  issue_type varchar(100),
+  priority varchar(20) DEFAULT 'low', -- low/medium/high/emergency
+  description text,
+  status varchar(20) DEFAULT 'pending', -- pending/in_progress/completed/cancelled
+  images jsonb, -- array of attachment ids or URLs
+  assigned_to uuid REFERENCES admin_profiles(user_id),
+  created_at timestamptz NOT NULL DEFAULT now(),
+  resolved_at timestamptz
+);
+
+-- 8) Announcements
+CREATE TABLE announcements (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  title varchar(255) NOT NULL,
+  content text NOT NULL,
+  category varchar(50), -- general/maintenance/events/important
+  created_by uuid REFERENCES admin_profiles(user_id),
+  created_at timestamptz NOT NULL DEFAULT now(),
+  publish_status varchar(20) DEFAULT 'draft', -- draft/published/archived
+  publish_at timestamptz, -- null = publish now when status is set
+  expires_at timestamptz,
+  audience jsonb -- e.g. {"blocks":["A","B"], "roles":["students"]} OR leave null for all
+);
+
+-- 9) Announcement audience (optional normalized table)
+CREATE TABLE announcement_audience (
+  announcement_id uuid REFERENCES announcements(id) ON DELETE CASCADE,
+  audience_type varchar(50), -- e.g., 'block','role','student'
+  audience_value varchar(200), -- e.g., 'Block A' or 'STD001'
+  PRIMARY KEY (announcement_id, audience_type, audience_value)
+);
+
+-- 10) Attachments (images/files)
+CREATE TABLE attachments (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  filename varchar(255),
+  content_type varchar(100),
+  size_bytes int,
+  url text, -- where it's stored (S3 path or local)
+  uploaded_by uuid REFERENCES users(id),
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+-- 11) Password reset tokens
+CREATE TABLE password_resets (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid REFERENCES users(id) ON DELETE CASCADE,
+  token varchar(255) UNIQUE NOT NULL,
+  expires_at timestamptz NOT NULL,
+  used boolean NOT NULL DEFAULT false,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+-- 12) Sessions / refresh tokens (optional)
+CREATE TABLE sessions (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid REFERENCES users(id) ON DELETE CASCADE,
+  refresh_token varchar(255) UNIQUE NOT NULL,
+  user_agent text,
+  ip_address inet,
+  expires_at timestamptz NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+-- 13) Basic audit log (optional)
+CREATE TABLE audit_logs (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid REFERENCES users(id),
+  action varchar(100),
+  target_type varchar(50),
+  target_id uuid,
+  ip inet,
+  user_agent text,
+  meta jsonb,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+-- Useful indexes
+CREATE INDEX idx_student_student_number ON student_profiles(student_number);
+CREATE INDEX idx_payments_student ON payments(student_id);
+CREATE INDEX idx_room_assignments_room ON room_assignments(room_id);
+CREATE INDEX idx_announcements_status ON announcements(publish_status);

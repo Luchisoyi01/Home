@@ -148,3 +148,12 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+/* Profile photo utility - keeps image a perfect circle and covers the area */
+.profile-photo {
+    width: 140px;
+    height: 140px;
+    object-fit: cover; /* crop to fill */
+    display: inline-block;
+    border-radius: 50%;
+}

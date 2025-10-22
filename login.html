@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Hostel Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .login-card .card-header {
+            background: none;
+            border: none;
+            padding-bottom: 0;
+        }
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            background: #1a237e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: white;
+            font-size: 2rem;
+        }
+        .btn-login {
+            background: #1a237e;
+            color: white;
+            padding: 10px 20px;
+        }
+        .btn-login:hover {
+            background: #0d47a1;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card login-card">
+                    <div class="card-header text-center pt-4">
+                        <div class="login-logo mb-3">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <h4>Student Haven Hostel</h4>
+                        <p class="text-muted">Login to your account</p>
+                        <!-- Nav tabs for Student/Admin -->
+                        <ul class="nav nav-pills justify-content-center mt-3" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="student-tab" data-bs-toggle="tab" data-bs-target="#student" type="button" role="tab" aria-controls="student" aria-selected="true">Student</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="admin-tab" data-bs-toggle="tab" data-bs-target="#admin" type="button" role="tab" aria-controls="admin" aria-selected="false">Admin</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <!-- Student Tab Pane -->
+                            <div class="tab-pane fade show active" id="student" role="tabpanel" aria-labelledby="student-tab">
+                                <form action="student-dashboard.html" method="POST">
+                                    <div class="mb-3">
+                                        <label class="form-label">Student ID</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                            <input type="text" class="form-control" placeholder="Enter your student ID" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                            <input type="password" class="form-control" placeholder="Enter your password" required>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="remember-student">
+                                            <label class="form-check-label" for="remember-student">Remember me</label>
+                                        </div>
+                                        <a href="reset-password.html" class="text-decoration-none">Forgot password?</a>
+                                    </div>
+                                    <button type="submit" class="btn btn-login w-100 mb-3">Login</button>
+                                    <div class="text-center">
+                                        <span class="text-muted">Don't have an account?</span>
+                                        <a href="register.html" class="text-decoration-none">Register here</a>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Admin Tab Pane -->
+                            <div class="tab-pane fade" id="admin" role="tabpanel" aria-labelledby="admin-tab">
+                                <form action="hostel-admin.html" method="POST">
+                                    <div class="mb-3">
+                                        <label class="form-label">Admin Email</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                            <input type="email" class="form-control" placeholder="admin@hostel.com" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                            <input type="password" class="form-control" placeholder="Enter your password" required>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="remember-admin">
+                                            <label class="form-check-label" for="remember-admin">Remember me</label>
+                                        </div>
+                                        <a href="reset-password.html" class="text-decoration-none">Forgot password?</a>
+                                    </div>
+                                    <button type="submit" class="btn btn-danger w-100 mb-3">Admin Login</button>
+                                    <div class="text-center">
+                                        <a href="login.html" class="text-decoration-none">Back to student login</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
